@@ -1,6 +1,7 @@
 resource "aws_instance" "frontend" {
   ami           = data.aws_ami.centos.image_id
   instance_type = "t3.micro"
+  vpc_security_group_ids=[data.aws_security_group.allow-all.id]
 
   tags = {
     Name = "frontend"
@@ -12,7 +13,10 @@ resource "aws_route53_record" "frontend" {
   type    = "A"
   ttl     = 30
   records = [aws_instance.frontend.private_ip]
-}
+} # DNS APPLY FOR FRONTEND PENDING FOR REMAINING AND CREATION OF DNS ALSO
+data "aws_security_group" "allow-all" {
+  name = "allow-all"
+} # TO APPLY SECURITY GROUPS FOR OUR SERVERS
 data "aws_ami" "centos" {
   owners      = ["973714476881"]
   most_recent = true
@@ -22,7 +26,7 @@ data "aws_ami" "centos" {
 resource "aws_instance" "mongodb" {
   ami           = data.aws_ami.centos.image_id
   instance_type = "t3.micro"
-
+  vpc_security_group_ids=[data.aws_security_group.allow-all.id]
   tags = {
     Name = "mongodb"
   }
@@ -30,7 +34,7 @@ resource "aws_instance" "mongodb" {
 resource "aws_instance" "catalogue" {
   ami           = data.aws_ami.centos.image_id
   instance_type = "t3.micro"
-
+  vpc_security_group_ids=[data.aws_security_group.allow-all.id]
   tags = {
     Name = "catalogue"
   }
@@ -38,7 +42,7 @@ resource "aws_instance" "catalogue" {
 resource "aws_instance" "redis" {
   ami           = data.aws_ami.centos.image_id
   instance_type = "t3.micro"
-
+  vpc_security_group_ids=[data.aws_security_group.allow-all.id]
   tags = {
     Name = "redis"
   }
@@ -46,7 +50,7 @@ resource "aws_instance" "redis" {
 resource "aws_instance" "cart" {
   ami           = data.aws_ami.centos.image_id
   instance_type = "t3.micro"
-
+  vpc_security_group_ids=[data.aws_security_group.allow-all.id]
   tags = {
     Name = "cart"
   }
@@ -54,7 +58,7 @@ resource "aws_instance" "cart" {
 resource "aws_instance" "user" {
   ami           = data.aws_ami.centos.image_id
   instance_type = "t3.micro"
-
+  vpc_security_group_ids=[data.aws_security_group.allow-all.id]
   tags = {
     Name = "user"
   }
@@ -62,7 +66,7 @@ resource "aws_instance" "user" {
 resource "aws_instance" "mysql" {
   ami           = data.aws_ami.centos.image_id
   instance_type = "t3.micro"
-
+  vpc_security_group_ids=[data.aws_security_group.allow-all.id]
   tags = {
     Name = "mysql"
   }
@@ -70,7 +74,7 @@ resource "aws_instance" "mysql" {
 resource "aws_instance" "shipping" {
   ami           = data.aws_ami.centos.image_id
   instance_type = "t3.micro"
-
+  vpc_security_group_ids=[data.aws_security_group.allow-all.id]
   tags = {
     Name = "shipping"
   }
@@ -78,7 +82,7 @@ resource "aws_instance" "shipping" {
 resource "aws_instance" "rabbitmq" {
   ami           = data.aws_ami.centos.image_id
   instance_type = "t3.micro"
-
+  vpc_security_group_ids=[data.aws_security_group.allow-all.id]
   tags = {
     Name = "rabbitmq"
   }
@@ -86,7 +90,7 @@ resource "aws_instance" "rabbitmq" {
 resource "aws_instance" "payment" {
   ami           = data.aws_ami.centos.image_id
   instance_type = "t3.micro"
-
+  vpc_security_group_ids=[data.aws_security_group.allow-all.id]
   tags = {
     Name = "payment"
   }
